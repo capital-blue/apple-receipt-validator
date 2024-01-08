@@ -1,5 +1,6 @@
 import base64
 import urllib.request
+import json
 from asn1crypto.cms import ContentInfo
 from OpenSSL.crypto import load_certificate, FILETYPE_ASN1, X509Store, X509StoreContext, X509StoreContextError
 from cryptography.hazmat.backends import default_backend
@@ -7,7 +8,7 @@ from cryptography.hazmat.primitives import serialization, hashes
 from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.x509 import load_der_x509_certificate
 
-def handler(event, context):
+def lambda_handler(event, context):
     # Load the contents of the receipt file
     receipt_file = open('./sandboxReceipt', 'rb').read()
 
@@ -33,17 +34,21 @@ def handler(event, context):
     trusted_store.add_cert(trusted_root)
 
     try:
-      X509StoreContext(trusted_store, wwdr_cert).verify_certificate()
-      trusted_store.add_cert(wwdr_cert)
+        X509StoreContext(trusted_store, wwdr_cert).verify_certificate()
+        trusted_store.add_cert(wwdr_cert)
     except X509StoreContextError as e:
-      print("WWDR certificate invalid")
-      exit()
+        print("WWDR certificate invalid")
+        return {
+            "result":False
+        }
 
     try:
-      X509StoreContext(trusted_store, itunes_cert).verify_certificate()
+        X509StoreContext(trusted_store, itunes_cert).verify_certificate()
     except X509StoreContextError as e:
-      print("iTunes certificate invalid")
-      exit()
+        print("iTunes certificate invalid")
+        return {
+            "result":False
+        }
 
     try:
         cert = load_der_x509_certificate(itunes_cert_data, default_backend())
@@ -57,3 +62,10 @@ def handler(event, context):
         print("The receipt data signature is valid")
     except Exception as e:
         print("The receipt data is invalid: %s" % e)
+        return {
+            "result":False
+        }
+
+    return {
+        "result":True
+    }
