@@ -17,8 +17,8 @@ def lambda_handler(event, context):
         }
     receipt_file = payload
 
-    # Use asn1crypto's cms definitions to parse the PKCS#7 format
     try:
+        # Use asn1crypto's cms definitions to parse the PKCS#7 format
         pkcs_container = ContentInfo.load(base64.b64decode(receipt_file))
 
         # Extract the certificates, signature, and receipt_data
