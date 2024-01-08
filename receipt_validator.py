@@ -9,8 +9,15 @@ from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.x509 import load_der_x509_certificate
 
 def lambda_handler(event, context):
+    payload = event.get('payload')
+    if payload is None:
+        return {
+            "message": "payload is none",
+            "result": False
+        }
+    
     # Load the contents of the receipt file
-    receipt_file = open('./sandboxReceipt', 'rb').read()
+    receipt_file = payload
 
     # Use asn1crypto's cms definitions to parse the PKCS#7 format
     pkcs_container = ContentInfo.load(base64.b64decode(receipt_file))
