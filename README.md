@@ -22,3 +22,9 @@ $ sh make_lambda_layer.sh
 ```
 $ python test.py
 ```
+
+サンプルリクエスト
+
+```
+$ curl -X POST -H "Content-Type: application/json" -d '{"payload": "base64 encoded receipt data"}' https://5zzehzkwt4.execute-api.ap-northeast-1.amazonaws.com/test/verify-apple-receipt
+```
