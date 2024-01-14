@@ -28,3 +28,24 @@ $ python test.py
 ```
 $ curl -X POST -H "Content-Type: application/json" -d '{"payload": "base64 encoded receipt data"}' https://5zzehzkwt4.execute-api.ap-northeast-1.amazonaws.com/test/verify-apple-receipt
 ```
+
+サンプルレスポンス
+
+```
+{
+    "result": true,
+    "receipt": [
+    {
+        "expires_date": "",
+        "cancellation_date": "",
+        "quantity": 1,
+        "web_order_line_item_id": 0,
+        "product_id": "cid0001",
+        "transaction_id": "2000000493489057",
+        "original_transaction_id": "2000000493489057",
+        "purchase_date": "2024-01-05T01:49:18Z",
+        "original_purchase_date": "2024-01-05T01:49:18Z"
+    }]
+}
+```
+
