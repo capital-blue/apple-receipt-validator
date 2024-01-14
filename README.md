@@ -17,7 +17,7 @@ Layerに追加する外部ライブラリのzipファイルを作成
 $ sh make_lambda_layer.sh
 ```
 
-テスト実行
+ローカル環境でテスト実行
 
 ```
 $ python test.py
