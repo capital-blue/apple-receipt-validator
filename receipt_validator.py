@@ -76,24 +76,6 @@ def lambda_handler(event, context):
     #         "result":False
     #     }
 
-<<<<<<< Updated upstream
-    try:
-        cert = load_der_x509_certificate(itunes_cert_data, default_backend())
-        public_key = cert.public_key()
-        public_key.verify(
-            signer_info['signature'].native,
-            receipt_data.native,
-            padding.PKCS1v15(),
-            hashes.SHA256()
-        )
-    except Exception as e:
-        error_message = str(e)
-        print(f"receipt data is invalid 2: {error_message}")
-        return {
-            "message": "receipt data is invalid",
-            "result":False
-        }
-=======
     # try:
     #     cert = load_der_x509_certificate(itunes_cert_data, default_backend())
     #     public_key = cert.public_key()
@@ -110,7 +92,6 @@ def lambda_handler(event, context):
     #         "message": "receipt data is invalid",
     #         "result":False
     #     }
->>>>>>> Stashed changes
 
     # parse receipt data
     attribute_types = [
