@@ -82,7 +82,7 @@ def lambda_handler(event, context):
             signer_info['signature'].native,
             receipt_data.native,
             padding.PKCS1v15(),
-            hashes.SHA1()
+            hashes.SHA256()
         )
     except Exception as e:
         error_message = str(e)
