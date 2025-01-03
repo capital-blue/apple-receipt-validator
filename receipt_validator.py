@@ -46,7 +46,7 @@ def lambda_handler(event, context):
         trusted_root = load_certificate(FILETYPE_ASN1, trusted_root_data)
         trusted_store = X509Store()
         trusted_store.add_cert(trusted_root)
-    except Exeption as e:
+    except Exception as e:
         error_message = str(e)
         print(f"failed to load root certificate: {error_message}")
         return {
