@@ -35,7 +35,7 @@ def lambda_handler(event, context):
         wwdr_cert = load_certificate(FILETYPE_ASN1, wwdr_cert_data)
     except Exception as e:
         error_message = str(e)
-        print(f"receipt data is invalid: {error_message}")
+        print(f"receipt data is invalid 1: {error_message}")
         return {
             "message": "receipt data is invalid type",
             "result":False
@@ -86,7 +86,7 @@ def lambda_handler(event, context):
         )
     except Exception as e:
         error_message = str(e)
-        print(f"receipt data is invalid: {error_message}")
+        print(f"receipt data is invalid 2: {error_message}")
         return {
             "message": "receipt data is invalid",
             "result":False
